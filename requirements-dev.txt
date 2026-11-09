@@ -1,0 +1,5 @@
+# Development and CI tools only. Not needed to run the app.
+# Versions verified to exist on PyPI and installed locally on Nov 8, 2026 (SPMP risk R9).
+flake8==7.4.1
+bandit==1.9.4
+coverage==7.16.2

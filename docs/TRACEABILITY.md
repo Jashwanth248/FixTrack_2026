@@ -30,7 +30,7 @@ The October 17 SRS remains a **proposed** baseline. “Implemented” below mean
 | NFR-08 Usability | Labeled forms | Five-person timed test pending |
 | NFR-09 Compatibility | Responsive local CSS | Chromium desktop/mobile smoke check; Firefox and full keyboard review pending |
 | NFR-10 Maintainability | Test suite + CI | Requirement mapping present; lint and 80% core coverage gate pending |
-| NFR-11 Recovery | No automated backup feature | Timed backup/restore validation pending |
+| NFR-11 Recovery (NFR-12 in SRS v2.0) | tools/check_backup.py + tools/recovery_drill.py (Module 6) | tools/test_check_backup.py (11 tests); database-part drill recorded in docs/evidence/module6/; clean-install service restore on a 2nd laptop (SPMP T13, RT-12) pending |
 | NFR-12 Secrets/errors | Environment config + generic errors | No runtime secrets/data committed; full operational logging audit pending |
 
 ## Scope choices

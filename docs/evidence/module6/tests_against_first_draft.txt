@@ -1,0 +1,92 @@
+test_changed_priority_same_count_is_mismatch (test_check_backup.CheckBackupTests) ... FAIL
+test_command_line_exit_codes (test_check_backup.CheckBackupTests) ... ERROR
+test_identical_copy_matches (test_check_backup.CheckBackupTests) ... ok
+test_inputs_are_not_modified (test_check_backup.CheckBackupTests) ... ok
+test_missing_history_rows_is_mismatch (test_check_backup.CheckBackupTests) ... FAIL
+test_missing_history_table_is_mismatch (test_check_backup.CheckBackupTests) ... ERROR
+test_missing_primary_key_is_mismatch (test_check_backup.CheckBackupTests) ... FAIL
+test_nonexistent_input_is_error_and_no_file_is_created (test_check_backup.CheckBackupTests) ... ERROR
+test_only_allow_listed_tables_reach_sql (test_check_backup.CheckBackupTests) ... ERROR
+test_same_file_is_input_error (test_check_backup.CheckBackupTests) ... FAIL
+test_view_substituted_for_history_table_is_rejected (test_check_backup.CheckBackupTests) ... FAIL
+
+======================================================================
+ERROR: test_command_line_exit_codes (test_check_backup.CheckBackupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/draft/test_check_backup.py", line 151, in test_command_line_exit_codes
+    self.assertEqual(check_backup.main([str(self.backup), str(self.restored)]), 0)
+AttributeError: module 'check_backup' has no attribute 'main'
+
+======================================================================
+ERROR: test_missing_history_table_is_mismatch (test_check_backup.CheckBackupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/draft/test_check_backup.py", line 97, in test_missing_history_table_is_mismatch
+    problems = check_backup.compare(self.backup, self.restored)
+  File "/tmp/draft/check_backup.py", line 23, in compare
+    rows_b = b.execute(f'SELECT * FROM {table} ORDER BY id').fetchall()
+sqlite3.OperationalError: no such table: maintenance_history
+
+======================================================================
+ERROR: test_nonexistent_input_is_error_and_no_file_is_created (test_check_backup.CheckBackupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/draft/test_check_backup.py", line 127, in test_nonexistent_input_is_error_and_no_file_is_created
+    check_backup.compare(self.backup, missing)
+  File "/tmp/draft/check_backup.py", line 23, in compare
+    rows_b = b.execute(f'SELECT * FROM {table} ORDER BY id').fetchall()
+sqlite3.OperationalError: no such table: maintenance_ticket
+
+======================================================================
+ERROR: test_only_allow_listed_tables_reach_sql (test_check_backup.CheckBackupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/draft/test_check_backup.py", line 139, in test_only_allow_listed_tables_reach_sql
+    con = check_backup.open_read_only(self.backup)
+AttributeError: module 'check_backup' has no attribute 'open_read_only'
+
+======================================================================
+FAIL: test_changed_priority_same_count_is_mismatch (test_check_backup.CheckBackupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/draft/test_check_backup.py", line 84, in test_changed_priority_same_count_is_mismatch
+    self.assertIn('maintenance_ticket: field values differ, first at id 1', problems[0])
+AssertionError: 'maintenance_ticket: field values differ, first at id 1' not found in 'maintenance_ticket: row values differ'
+
+======================================================================
+FAIL: test_missing_history_rows_is_mismatch (test_check_backup.CheckBackupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/draft/test_check_backup.py", line 89, in test_missing_history_rows_is_mismatch
+    self.assertIn('maintenance_history: row count 3 in backup, 2 restored', problems)
+AssertionError: 'maintenance_history: row count 3 in backup, 2 restored' not found in ['maintenance_history: row count 3 != 2']
+
+======================================================================
+FAIL: test_missing_primary_key_is_mismatch (test_check_backup.CheckBackupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/draft/test_check_backup.py", line 117, in test_missing_primary_key_is_mismatch
+    self.assertIn('maintenance_ticket: column definitions differ (name, type, NOT NULL or primary key)', problems)
+AssertionError: 'maintenance_ticket: column definitions differ (name, type, NOT NULL or primary key)' not found in []
+
+======================================================================
+FAIL: test_same_file_is_input_error (test_check_backup.CheckBackupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/draft/test_check_backup.py", line 120, in test_same_file_is_input_error
+    with self.assertRaises(check_backup.InputError):
+AssertionError: InputError not raised
+
+======================================================================
+FAIL: test_view_substituted_for_history_table_is_rejected (test_check_backup.CheckBackupTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/draft/test_check_backup.py", line 111, in test_view_substituted_for_history_table_is_rejected
+    self.assertIn('maintenance_history: expected a table in the restored file, found view', problems)
+AssertionError: 'maintenance_history: expected a table in the restored file, found view' not found in []
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.200s
+
+FAILED (failures=5, errors=4)
