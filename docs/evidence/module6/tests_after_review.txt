@@ -1,0 +1,16 @@
+test_changed_priority_same_count_is_mismatch (test_check_backup.CheckBackupTests) ... ok
+test_command_line_exit_codes (test_check_backup.CheckBackupTests) ... ok
+test_identical_copy_matches (test_check_backup.CheckBackupTests) ... ok
+test_inputs_are_not_modified (test_check_backup.CheckBackupTests) ... ok
+test_missing_history_rows_is_mismatch (test_check_backup.CheckBackupTests) ... ok
+test_missing_history_table_is_mismatch (test_check_backup.CheckBackupTests) ... ok
+test_missing_primary_key_is_mismatch (test_check_backup.CheckBackupTests) ... ok
+test_nonexistent_input_is_error_and_no_file_is_created (test_check_backup.CheckBackupTests) ... ok
+test_only_allow_listed_tables_reach_sql (test_check_backup.CheckBackupTests) ... ok
+test_same_file_is_input_error (test_check_backup.CheckBackupTests) ... ok
+test_view_substituted_for_history_table_is_rejected (test_check_backup.CheckBackupTests) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.233s
+
+OK
